@@ -88,4 +88,6 @@ def load_ppm_manual(filename):
         
     print(f"\n--- Loaded PPM Image ({width}x{height}) Successfully! ---")
     return image_grid
-
+# Test the bonus function
+# (It will look for a file named sample.ppm, or you can just print that the function is ready)
+print("\n--- Bonus PPM Loader Ready ---")
