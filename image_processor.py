@@ -45,3 +45,47 @@ for r in range(5):
         blur[r][c] = total // count
 show(blur, "3X3 Box Blur")
 
+# ==========================================
+# BONUS: LOAD A PPM IMAGE BY HAND
+# ==========================================
+
+def load_ppm_manual(filename):
+    """Parses a simple plain-text PPM (P3) image file line by line in pure Python."""
+    with open(filename, 'r') as f:
+        lines = f.readlines()
+    
+    # Filter out comment lines starting with '#' and strip whitespace
+    tokens = []
+    for line in lines:
+        line = line.split('#')[0].strip() # Remove comments
+        if line:
+            tokens.extend(line.split())
+            
+    # Read PPM header metadata
+    magic_number = tokens[0]
+    if magic_number != 'P3':
+        raise ValueError("Not a valid P3 PPM file format!")
+        
+    width = int(tokens[1])
+    height = int(tokens[2])
+    max_val = int(tokens[3])
+    
+    # Extract pixel color triplets (R, G, B)
+    pixel_data = [int(x) for x in tokens[4:]]
+    
+    # Reorganize into a 2D grid of RGB pixels
+    image_grid = []
+    idx = 0
+    for r in range(height):
+        row = []
+        for c in range(width):
+            r_val = pixel_data[idx]
+            g_val = pixel_data[idx+1]
+            b_val = pixel_data[idx+2]
+            row.append((r_val, g_val, b_val))
+            idx += 3
+        image_grid.append(row)
+        
+    print(f"\n--- Loaded PPM Image ({width}x{height}) Successfully! ---")
+    return image_grid
+
