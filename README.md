@@ -19,6 +19,9 @@ A command-line image processing tool built entirely in core Python (without NumP
 ## What the Terminal Output Shows
 The program prints structured 5x5 numerical grids (ranging from 0 to 255) in the terminal before and after each operation, allowing a reader to manually verify pixel-level transformations without needing a graphical display.
 
+## Bonus Extension
+- **PPM Image Parsing:** Implemented a pure Python text parser (P3 format) that reads raw PPM image files line by line, strips comments, extracts width/height metadata, and maps RGB pixel color triplets into a structured 2D grid without any external libraries.
+
 ## How to Run
 ```bash
 python3 image_processor.py
