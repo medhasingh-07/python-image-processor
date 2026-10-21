@@ -44,7 +44,6 @@ for r in range(5):
                     count += 1
         blur[r][c] = total // count
 show(blur, "3X3 Box Blur")
-
 # ==========================================
 # BONUS: LOAD A PPM IMAGE BY HAND
 # ==========================================
@@ -54,14 +53,12 @@ def load_ppm_manual(filename):
     with open(filename, 'r') as f:
         lines = f.readlines()
     
-    # Filter out comment lines starting with '#' and strip whitespace
     tokens = []
     for line in lines:
-        line = line.split('#')[0].strip() # Remove comments
+        line = line.split('#')[0].strip()
         if line:
             tokens.extend(line.split())
             
-    # Read PPM header metadata
     magic_number = tokens[0]
     if magic_number != 'P3':
         raise ValueError("Not a valid P3 PPM file format!")
@@ -70,10 +67,8 @@ def load_ppm_manual(filename):
     height = int(tokens[2])
     max_val = int(tokens[3])
     
-    # Extract pixel color triplets (R, G, B)
     pixel_data = [int(x) for x in tokens[4:]]
     
-    # Reorganize into a 2D grid of RGB pixels
     image_grid = []
     idx = 0
     for r in range(height):
@@ -86,8 +81,15 @@ def load_ppm_manual(filename):
             idx += 3
         image_grid.append(row)
         
-    print(f"\n--- Loaded PPM Image ({width}x{height}) Successfully! ---")
     return image_grid
-# Test the bonus function
-# (It will look for a file named sample.ppm, or you can just print that the function is ready)
-print("\n--- Bonus PPM Loader Ready ---")
+
+# Test execution for the bonus
+if __name__ == "__main__":
+    print("\n--- BONUS: Testing Manual PPM Loader ---")
+    try:
+        color_grid = load_ppm_manual("sample.ppm")
+        print("Successfully parsed PPM color grid:")
+        for row in color_grid:
+            print(row)
+    except FileNotFoundError:
+        print("sample.ppm not found yet (create it to test!)")
